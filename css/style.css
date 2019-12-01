@@ -1,0 +1,18 @@
+.button-minus{
+    background: white;
+    border-right: none;
+    outline: none;
+    border-color: rgb(94, 149, 221);
+}
+.quantity-field{
+    border-right: none;
+    outline: none;
+    border-left: none;
+    border-color: rgb(94, 149, 221);
+}
+.button-plus{
+    outline: none;
+    border-left: none;
+    border-color: rgb(94, 149, 221);
+    background: white;
+}
