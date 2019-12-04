@@ -24,12 +24,24 @@ $(document).ready(function () {
                             <div class="col-3"></div>
                             <div class="col-3">Number of person</h2></div>
                             <div class="col-3">
-                            <div class="input-group">
-                                <input type="button" value="-" class="button-minus" data-field="quantity">
-                                <input type="number" step="2"  max="15" value="1" name="quantity" class="quantity-field text-center">
-                                <input type="button" value="+" class="button-plus" data-field="quantity">
-                            </div>
+                            <div class="center">
+                            <p>
+                              </p><div class="input-group">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                          <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                                  </span>
+                                  <input type="text" name="quant[1]" class="form-control id="data" input-number" value="1" min="1" max="15">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                  </span>
+                              </div>
+                            
                         </div>
+                        
                             </div>
                             </div>
                             <div class="col-3"></div>
@@ -45,22 +57,18 @@ $(document).ready(function () {
                         </div>
                     </div>
                    `;
+                  
                    ingredients.forEach(item => {
                     $('.display').html(result);
-                      
-                    var input = $('.quantity-field').val();
-                   
-                    console.log(input);
-                    
                     
                             result += `
-                    <div class="container mt-5">
+                    <div class="container">
                         <div class="row">
                         <div class="col-md-2">
                         <img src="${item.iconUrl}" width="50px"><br><br><br>
                         </div>
                         <div class="col-md-2">
-                            ${item.quantity*input}
+                            ${item.quantity}
                             ${item.unit.slice(0, 1).toUpperCase()}
                         </div>
                         <div class="col-md-2">
@@ -76,6 +84,78 @@ $(document).ready(function () {
                     `
                         })
                     }
+                    
+                });
+                $('.btn-number').click(function(e){
+                    e.preventDefault();
+                    
+                    fieldName = $(this).attr('data-field');
+                    type      = $(this).attr('data-type');
+                    var input = $("input[name='"+fieldName+"']");
+                    var currentVal = parseInt(input.val());
+                    if (!isNaN(currentVal)) {
+                        if(type == 'minus') {
+                            
+                            if(currentVal > input.attr('min')) {
+                                input.val(currentVal - 1).change();
+                            } 
+                            if(parseInt(input.val()) == input.attr('min')) {
+                                $(this).attr('disabled', true);
+                            }
+                
+                        } else if(type == 'plus') {
+                
+                            if(currentVal < input.attr('max')) {
+                                input.val(currentVal + 1).change();
+                            }
+                            if(parseInt(input.val()) == input.attr('max')) {
+                                $(this).attr('disabled', true);
+                            }
+                
+                        }
+                    } else {
+                        input.val(0);
+                    }
+                });
+                $('.input-number').focusin(function(){
+                   $(this).data('oldValue', $(this).val());
+                });
+                $('.input-number').change(function() {
+                    
+                    minValue =  parseInt($(this).attr('min'));
+                    maxValue =  parseInt($(this).attr('max'));
+                    valueCurrent = parseInt($(this).val());
+                    
+                    name = $(this).attr('name');
+                    if(valueCurrent >= minValue) {
+                        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+                    } else {
+                        alert('Sorry, the minimum value was reached');
+                        $(this).val($(this).data('oldValue'));
+                    }
+                    if(valueCurrent <= maxValue) {
+                        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+                    } else {
+                        alert('Sorry, the maximum value was reached');
+                        $(this).val($(this).data('oldValue'));
+                    }
+
+                    $(".input-number").keydown(function (e) {
+                        // Allow: backspace, delete, tab, escape, enter and .
+                        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                             // Allow: Ctrl+A
+                            (e.keyCode == 65 && e.ctrlKey === true) || 
+                             // Allow: home, end, left, right
+                            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                                 // let it happen, don't do anything
+                                 return;
+                        }
+                        // Ensure that it is a number and stop the keypress
+                        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                            e.preventDefault();
+                        }
+                    });
+                    
                 });
             }
         });
