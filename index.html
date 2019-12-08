@@ -5,13 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
+    <title>Select Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -28,9 +23,29 @@
             <div class="col-4"></div>
         </div>
     </div>
-    <div class="container display"></div>
+    <div class="container mt-5" id="recipe"></div>
+        <div class="container mt-5">
+            <div class="row" id="input" style="display: none;">
+                <div class="col-3"></div>
+                <div class="col-3">Number of person</div>
+                <div class="col-3">
+                    <form action="#">
+                            <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-light" id="minus" type="button">-</button>
+                                    </div>
+                                    <input type="text" id="members" width="10px" value="1" min="1" max="15" disabled class="form-control text-center">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light" id="plus" type="button">+</button>
+                                    </div>
+                                </div>
+                    </form>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+    <div class="container" id="ingredient"></div>
     <script src="js/jquery-3.4.1.min.js"></script>
-    
     <script src="js/recipt.js"></script>
 </body>
 
