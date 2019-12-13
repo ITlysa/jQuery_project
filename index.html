@@ -1,52 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Select Form</title>
+    <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
-
 <body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <select id="choose_me_baby" class="form-control">
-                    <option value="" disabled selected>Choose Recipe</option>
-                    <option value="0">Avocado Shake (Toek KaLok)</option>
-                    <option value="1">French creps</option>
+                <select name="" id="recipe" class="form-control">
+                    <option value="" disabled selected>Choose recipe</option>
                 </select>
             </div>
             <div class="col-4"></div>
         </div>
     </div>
-    <div class="container mt-5" id="recipe"></div>
-        <div class="container mt-5">
-            <div class="row" id="input" style="display: none;">
-                <div class="col-3"></div>
-                <div class="col-3">Number of person</div>
-                <div class="col-3">
-                    <form action="#">
-                            <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-light" id="minus" type="button">-</button>
-                                    </div>
-                                    <input type="text" id="members" width="10px" value="1" min="1" max="15" disabled class="form-control text-center">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-light" id="plus" type="button">+</button>
-                                    </div>
-                                </div>
-                    </form>
-                </div>
-                <div class="col-3"></div>
+    <div class="container">
+        <div class="row mt-5" id="result"></div>
+        <div class="row mt-5" id="input"></div>
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-borderless" id="ingredient">
+                </table>
             </div>
+            <div class="col-6" id="instruction" style="margin-top: 7px;"></div>
         </div>
-    <div class="container" id="ingredient"></div>
+    </div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/recipt.js"></script>
 </body>
-
 </html>

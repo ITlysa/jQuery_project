@@ -1,167 +1,126 @@
-
-var member;
-$(document).ready(function () {
-    $('#choose_me_baby').on('change', function(){
-        getDefaultRecipe();
-        $("#input").fadeIn(100);
-        
-        $("#minus").on('click', function(){
-            var newMember = $('#members').val();
-            if(newMember > 1) {
-                updateRecipe();
-                member = parseInt(newMember) -1;
-            }
-            descrease();
-        })
-        $("#plus").on("click", function(){
-            var newMember = $('#members').val();
-            if(newMember < 15) {
-                updateRecipe();
-                member = parseInt(newMember) + 1;
-            }
-            increase();
-        }); 
-
-    
-    })
-});
-function getDefaultRecipe() {
-    $.ajax({
-        dataType: 'json',
-        url: getUrl(),
-        success: (data) => defaultRecipe(data),
-        error: () => getError(),
-    });
-}
-function updateRecipe() {
-    $.ajax({
-        dataType: 'json',
-        url: getUrl(),
-        success: (data) => getRecipe(data),
-        error: () => getError(),
-    });
-}
 function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
 }
 
-function getError() { console.log("Error") }
-
-function getRecipe(myData) {
-    var result = "";
-    myData.recipes.forEach( recipe => {
-        if (recipe.id == $('#choose_me_baby').val()){
-            result += `
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-3">
-                <h3>${recipe.name}</h3>
-            </div>
-            <div class="col-6">
-                <img src="${recipe.iconUrl}" class="img-fluid" width="270px" alt="">
-            </div>
+$(document).ready(function () {
+    requestApi();
+    $("#recipe").on('change', function () {
+        var id = $("#recipe").val();
+        getRecipe(id);
+        $("#minus").on('click', function(){
            
-        </div>
-        `;
-            updateIngredient(recipe.ingredients);
-        }
-    });
-    printOut("recipe",result);
-}
-
-function defaultRecipe(myData) {
-    var result = "";
-    myData.recipes.forEach( recipe => {
-        if (recipe.id == $('#choose_me_baby').val()){
-        defaultIngredient(recipe.ingredients);
-        result += `
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-3">
-                <h3>${recipe.name}</h3>
-            </div>
-            <div class="col-6">
-                <img src="${recipe.iconUrl}" class="img-fluid" width="270px" alt="">
-            </div>
-           
-        </div>
-        `;
-        }
-    });
-    printOut("recipe",result);
-}
-
-function defaultIngredient(ing) {
-    result = "";
-    ing.forEach(item => {
-        result += `
-        <div class="row">
-        <div class="col-md-2">
-        <img src="${item.iconUrl}" width="50px"><br><br><br>
-        </div>
-        <div class="col-md-2">
-            ${item.quantity}
-            ${item.unit.slice(0, 1).toUpperCase()}
-            </div>
-            <div class="col-md-2">
-            ${item.name}
-            </div>
-            <div class="border-left d-sm-none d-md-block" style="width: 0px;"></div>
-            <div class="col-md-6" style="margin-left: -1px;">
-            <hr class="d-sm-block d-md-none">
+                descrease();
             
-            </div>
-            </div>
+        })
+        $("#plus").on("click", function(){
+                  
+                increase();
+        }); 
+
+    })
+})
+function requestApi() {
+    $.ajax({
+        dataType: "json",
+        url: getUrl(),
+        success: (data) => chooseRecipe(data.recipes),
+        error: () => console.log("Error"),
+    })
+}
+var allData = [];
+function chooseRecipe(recipe) {
+    allData = recipe;
+    var option = "";
+    recipe.forEach(item => {
+        option += `<option value="${item.id}">${item.name}</option>`;
+    });
+    $("#recipe").append(option);
+}
+function getRecipe(id) {
+    allData.forEach(item => {
+        if (item.id == id) {
+            eachRecipe(item.name, item.iconUrl);
+            input(item.nbGuests);
+            eachIngredient(item.ingredients);
+            eachStep(item.instructions);
+        }
+    });
+
+}
+function eachRecipe(name, img) {
+    var result = "";
+    result += `
+        <div class="col-3"></div>
+        <div class="col-3"><h2>${name}</h2></div>
+        <div class="col-3"><img src="${img}" width="200px"></div>
+        <div class="col-3"></div>
+    `;
+    $("#result").html(result);
+}
+function eachIngredient(ingredients){
+    result = "";
+    ingredients.forEach(element => {
+        result += `
+        <tr>
+            <td><img src="${element.iconUrl}" class="img-fluid" width="30px"></td>
+            <td>${element.quantity + " " + element.unit[0] }</td>
+            <td>${element.name}</td>
+        </tr>
         `;
     });
-    printOut('ingredient', result);  
+    $("#ingredient").html(result);
 }
-
-function updateIngredient(ing) {
-    result = "";
+function input(member){
+    var result = "";
+    result += `
     
-    ing.forEach(item => {
-        result += `
-        <div class="row">
-        <div class="col-md-2">
-        <img src="${item.iconUrl}" width="50px"><br><br><br>
-        </div>
-        <div class="col-md-2">
-            ${item.quantity * addMember(member)}
-            ${item.unit.slice(0, 1).toUpperCase()}
+    <div class="col-3"></div>
+    <div class="col-3">Number of person</div>
+    <div class="col-3">
+        <form action="#">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-light" id="minus" type="button">-</button>
+                </div>
+                <input type="text" id="members" width="10px" value="${member}" min="1" max="15" disabled
+                    class="form-control text-center">
+                <div class="input-group-append">
+                    <button class="btn btn-light" id="plus" type="button">+</button>
+                </div>
             </div>
-            <div class="col-md-2">
-            ${item.name}
-            </div>
-            <div class="border-left d-sm-none d-md-block" style="width: 0px;"></div>
-            <div class="col-md-6" style="margin-left: -1px;">
-            <hr class="d-sm-block d-md-none">
-            
-            </div>
-            </div>
-        `;
-    });
-    printOut('ingredient', result);  
+        </form>
+    </div>
+    <div class="col-3"></div>
+    `;
+    $("#input").html(result);
 }
-
-function printOut(elmentId, out) {
-    $('#' + elmentId).html(out);
-}
+var inputValue;
 function increase(){
     var value = $("#members").val();
-    var inputValue = parseInt(value) + 1;
+    inputValue = parseInt(value) + 1;
     if (inputValue <= 15){
         $("#members").val(inputValue);
+        
     }
 }
 function descrease(){
     var value = $("#members").val();
-    var inputValue = parseInt(value) - 1;
+    inputValue = parseInt(value) - 1;
     if (inputValue >= 1){
         $("#members").val(inputValue);
+    }        
+}
+
+function eachStep(instruction) {
+    var result = "";
+    var step = instruction.split('<step>');
+    for (var i = 1; i < step.length; i++) {
+        result += `
+        <h6 style="color:blue">Step ${i}</h6>
+        <p>${step[i]}</p>
+        `;
     }
+    $('#instruction').html(result);
 }
-function addMember(member) {
-    return  parseInt(member);
-}
+
