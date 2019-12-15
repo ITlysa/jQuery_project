@@ -7,6 +7,7 @@ $(document).ready(function () {
     requestApi();
     $("#recipe").on('change', function () {
         var id = $("#recipe").val();
+        $("#line").show();
         getRecipe(id);
         $("#minus").on('click', function(){
            
@@ -64,7 +65,7 @@ function eachIngredient(ingredients){
         result += `
         <tr>
             <td><img src="${element.iconUrl}" class="img-fluid" width="30px"></td>
-            <td>${element.quantity + " " + element.unit[0] }</td>
+            <td><span class="text-danger">${element.quantity}</span> ${element.unit[0] }</td>
             <td>${element.name}</td>
         </tr>
         `;
