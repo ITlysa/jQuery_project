@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container mt-5">
+<body >
+    
+    <div class="container mt-5" id="bg">
+        <div class="row" id="start">
+            <div class="col-12" >
+                    <h1 class="text-center text-light" id="wel">Welcome to Our Food &#127869;</h1>
+                    <p class="text-center text-light" id="p">Please enjoy with us</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
@@ -19,19 +26,23 @@
             </div>
             <div class="col-4"></div>
         </div>
-    </div>
-    <div class="container">
-        <div class="row mt-5" id="result"></div>
-        <div class="row mt-5" id="input"></div>
+        <div class="row mt-5" id="getRecipe"></div>
+        <div class="row mt-5 mb-5" id="input"></div>
+       
         <div class="row">
             <div class="col-6">
-                <table class="table table-borderless" id="ingredient">
+                <h3 class="text-center" id="ingr"  >Ingredients</h3>
+                <table class="table table-borderless mt-5" id="ingredient">
                 </table>
             </div>
             <div class="col-1"  id="line"></div>
-            <div class="col-5" id="instruction" style="margin-top: 7px;"></div>
+            <div class="col-5">
+                <h3 class="text-center" id="inst">Instructions</h3>
+                <table class="table table-borderless mt-5" id="instruction">
+            </div>
         </div>
     </div>
+   
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/recipt.js"></script>
 </body>

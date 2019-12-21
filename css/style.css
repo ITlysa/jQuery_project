@@ -1,5 +1,32 @@
 #line {
-    border-left: 1px solid black;
-    height: auto;
-    display: none;
-  }
+  border-left: 1px solid black;
+  height: auto;
+  display: none;
+}
+#plus, #members, #minus{
+  font-size: 18px;
+}
+#ingr, #inst{
+  display: none;
+}
+#eachstep{
+  color: blue;
+}
+body{
+background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('../bg1.jpg');
+background-size: cover;
+}
+#bg{
+background: rgb(180, 178, 178);
+}
+#start{
+margin-top: 130px;
+}
+#wel{
+padding-top: 90px;
+font-size:58px ;
+
+}
+#p{
+font-size: 22px;
+}
