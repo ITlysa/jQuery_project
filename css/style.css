@@ -1,8 +1,4 @@
-#line {
-  border-left: 1px solid black;
-  height: auto;
-  display: none;
-}
+
 #plus, #members, #minus{
   font-size: 18px;
 }
@@ -18,15 +14,19 @@ background-size: cover;
 }
 #bg{
 background: rgb(180, 178, 178);
+width: 80%;
 }
 #start{
-margin-top: 130px;
+margin-top: 80px;
 }
 #wel{
-padding-top: 90px;
+padding-top: 100px;
 font-size:58px ;
 
 }
 #p{
 font-size: 22px;
+}
+#ingredient,#instruction{
+  margin-left: 40px;
 }
