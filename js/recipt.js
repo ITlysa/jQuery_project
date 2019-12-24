@@ -148,7 +148,7 @@ function getUrl() {
         var {quantity} = element;
         newQuanlity = quantity / oldGuest * person;
         result += `
-        <tr>
+        <tr class="text-center">
             <td><img src="${element.iconUrl}" class="img-fluid" width="60px"></td>
             <td><span>${newQuanlity}</span> ${element.unit[0]}</td>
             <td>${element.name}</td>
