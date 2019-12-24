@@ -1,9 +1,9 @@
 
-#plus, #members, #minus{
-  font-size: 18px;
-}
 #ingr, #inst{
   display: none;
+}
+#ingr{
+  padding-left: 30px;
 }
 #eachstep{
   color: blue;
@@ -11,6 +11,7 @@
 body{
 background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('../bg1.jpg');
 background-size: cover;
+
 }
 #bg{
 background: rgb(180, 178, 178);
@@ -18,6 +19,8 @@ width: 80%;
 }
 #start{
 margin-top: 80px;
+font-family: 'PT Serif', serif;
+
 }
 #wel{
 padding-top: 100px;
@@ -25,8 +28,5 @@ font-size:58px ;
 
 }
 #p{
-font-size: 22px;
-}
-#ingredient,#instruction{
-  margin-left: 40px;
+  font-size: 24px;
 }

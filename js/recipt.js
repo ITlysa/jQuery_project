@@ -55,8 +55,8 @@ function getUrl() {
     var result = "";
     result += `
         
-        <div class="col-sm-12 "><h3 class="text-center">${name}</h3></div>
-        <div class="col-sm-12"><img src="${img}" class="mx-auto d-block" width="250px"></div>
+        <div class="col-sm-12 "><h3 class="text-center mb-4">${name}</h3></div>
+        <div class="col-sm-12"><img src="${img}" class="mx-auto d-block img-thumbnail" width="250px"></div>
        
     `;
     $("#getRecipe").html(result);
@@ -67,7 +67,7 @@ function getUrl() {
     ingredients.forEach(element => {
         const{ name, iconUrl, quantity, unit} = element;
         result += `
-        <tr>
+        <tr class="text-center">
             <td><img src="${iconUrl}" class="img-fluid" width="60px"></td>
             <td><span>${quantity}</span> ${unit[0]}</td>
             <td>${name}</td>
